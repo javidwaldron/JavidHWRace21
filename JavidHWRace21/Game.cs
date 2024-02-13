@@ -50,7 +50,7 @@ namespace JavidHWRace21
         {
 
 
-            // this line should be elsewhere right?
+            
             if (nextTask == Task.GetNumberOfPlayers)
             {
                 numberOfPlayers = cardTable.GetNumberOfPlayers();
@@ -80,34 +80,44 @@ namespace JavidHWRace21
             }
             else if (nextTask == Task.PlayerTurn)
             {
+                
+                
 
-                cardTable.ShowHands(players);
-
-                foreach (Player player in players)
+                    foreach (Player player in players)
                 {
+                    
 
-
-                    if (player.status == PlayerStatus.active && player.cards.Count < 3)
+                    if (player.status == PlayerStatus.active && player.turn < 3)
                     {
+                         
+                        
                         if (cardTable.OfferACard(player))
                         {
                             Card card = deck.DealTopCard();
                             player.cards.Add(card);
+                            player.turn++;
                             player.score = ScoreHand(player);
+                            cardTable.ShowHand(player);
+
 
                             if (player.score > 21)
                             {
                                 player.status = PlayerStatus.bust;
                                 break;
 
+
                             }
                             else if (player.score == 21)
                             {
                                 player.status = PlayerStatus.win;
                                 nextTask = Task.GameOver;
-
+                                player.turn = 3;
                                 break;
 
+                            }
+                            else if (player.turn == 3)
+                            {
+                                player.status = PlayerStatus.stay;
                             }
 
                         }
@@ -115,15 +125,17 @@ namespace JavidHWRace21
                         else
                         {
                             Console.WriteLine("" + player.name + " chooses to stay this round ");
-
+                            cardTable.ShowHands(players);
                             currentPlayer++;
+                            player.turn++;
                             if (currentPlayer > players.Count - 1)
                             {
                                 currentPlayer = 0; // back to the first player...
 
                             }
-                            if (player.cards.Count == 3 || player.status == PlayerStatus.win)
+                            if (player.cards.Count == 3 || player.status == PlayerStatus.win || player.status == PlayerStatus.bust)
                             {
+                                nextTask = Task.CheckForEnd;
                                 break;
                             }
 
@@ -172,6 +184,8 @@ namespace JavidHWRace21
         /// </summary>
         /// <param name="player">Instance representing one player</param>
         /// <returns></returns>
+       
+        
         public int ScoreHand(Player player)
         {
             int score = 0;

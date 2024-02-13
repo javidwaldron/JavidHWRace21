@@ -13,6 +13,7 @@ namespace JavidHWRace21
         public List<Card> cards = new List<Card>();
         public PlayerStatus status = PlayerStatus.active;
         public int score;
+        public int turn;
 
 
         public Player(string n)

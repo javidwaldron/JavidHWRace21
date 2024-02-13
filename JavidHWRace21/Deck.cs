@@ -73,6 +73,8 @@ namespace JavidHWRace21
         /// <summary>
         /// Randomly swap cards to shuffle the deck.
         /// </summary>
+        /// 
+
         public void Shuffle()
         {
             Console.WriteLine();
@@ -97,15 +99,7 @@ namespace JavidHWRace21
             }
         }
 
-
-        /// <summary>
-        /// Shows all cards. Kinda hacky. See comment below.
-        /// </summary>
-        /* Maybe we can make a variation on this that's more useful,
-         * but at the moment it's just really to confirm that our 
-         * shuffling method(s) worked! And normally we want our card 
-         * table to do all of the displaying, don't we?!
-         */
+        // Now that we know it works, changed ShowAll Crads to fun ASCII art
         public void ShowAllCards()
 
 
@@ -113,10 +107,14 @@ namespace JavidHWRace21
 
             Console.WriteLine("                              _____\r\n   _____                _____ |6    |\r\n  |2    | _____        |5    || o o | \r\n  |  o  ||3    | _____ | o o || o o | _____\r\n  |     || o o ||4    ||  o  || o o ||7    |\r\n  |  o  ||     || o o || o o ||____6|| o o | _____\r\n  |____2||  o  ||     ||____5|       |o o o||8    | _____\r\n         |____3|| o o |              | o o ||o o o||9    |\r\n                |____4|              |____7|| o o ||o o o|\r\n                                            |o o o||o o o|\r\n                                            |____8||o o o|\r\n                                                   |____9|\r\n \r\n\r\n");
         }
+
+
         /// <summary>
         /// Remove top card (defined here as last card in the list), an instance of Card
         /// </summary>
         /// <returns>the removed instance of Card, representing one of the 52 cards in the deck</returns>
+       
+        
         public Card DealTopCard()
         {
             Card card = cards[cards.Count - 1];
